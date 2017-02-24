@@ -1,0 +1,56 @@
+apply plugin: 'java'
+apply plugin: 'eclipse'
+
+sourceSets {
+  main {
+     java.srcDirs = ['src']
+     output.classesDir = 'out/classes'
+      resources {
+       srcDirs = ['src']
+     }
+   }
+}
+
+dependencies {
+    compile fileTree(dir: "${projectDir}/../../tmp/lib", include: ['*.jar'])
+}
+
+clean.doFirst {
+	delete "${rootDir}/out"
+}
+
+jar {
+	manifest {
+    attributes(
+		'Main-Class': 'statelessservice.SfTestServiceHost',
+		"Class-Path": configurations.compile.collect { 'lib/' + it.getName() }.join(' '))
+	baseName "SfTest"
+
+    destinationDir = file('../SfTestApplication/SfTestPkg/Code/')
+    }
+}
+
+task copyDeps<< {
+	copy {
+		from("${projectDir}/../../tmp/lib")
+		into("../SfTestApplication/SfTestPkg/Code/lib")
+		include('*.jar')
+	}
+	copy {
+		from("${projectDir}/../../tmp/lib")
+		into("../SfTestApplication/SfTestPkg/Code/lib")
+		include('*.so')
+	}
+	copy {
+		from("${projectDir}/../../tmp/lib")
+		into("../SfTestApplication/SfTestPkg/Code/lib")
+		include('*.dll')
+	}
+}
+
+
+defaultTasks 'clean', 'jar', 'copyDeps'
+
+
+
+

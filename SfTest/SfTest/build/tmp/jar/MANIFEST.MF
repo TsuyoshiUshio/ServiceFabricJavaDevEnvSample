@@ -1,0 +1,7 @@
+Manifest-Version: 1.0
+Class-Path: lib/asm-5.0.4.jar lib/asm-analysis-5.0.4.jar lib/asm-commo
+ ns-5.0.4.jar lib/asm-tree-5.0.4.jar lib/asm-util-5.0.4.jar lib/asm-xm
+ l-5.0.4.jar lib/microsoft.servicefabric.actors-preview.jar lib/micros
+ oft.servicefabric.services-preview.jar lib/system.fabric-preview.jar
+Main-Class: statelessservice.SfTestServiceHost
+
